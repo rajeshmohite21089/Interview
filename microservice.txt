@@ -1,0 +1,170 @@
+1.design principle in microservice
+
+distributek 
+
+Eurekha server
+
+1.add eureka server depedendency
+2.add spring cloud dependency
+3.add @EnableEurekaServer anotation
+3.add eureka server details in yaml file
+
+
+
+eurekha Client
+
+1.add eureka client depedendency
+2.add spring cloud dependency
+3.add EnableEurekaClient annotation
+3.add eureka client details in yaml file
+
+
+
+we annotated RestTemplate with @Loadbalanced
+
+
+@LoadBalanced
+public RestTemplate restTemplate()
+{
+ return new RestTemplate();
+} 
+
+
+
+API Gateway
+
+1. need add dependency  gatway
+2.add eureka client depedendency
+3.add spring cloud dependency
+4.add EnableEurekaClient annotation
+5. add actuator dependecy
+5.add eureka client details in yaml file
+7. add cloud gatway in yaml file
+
+ 
+Hystrix dashboard
+
+1. add Hystrix  dependency in api gateway
+2.add fallback controller in api gateway spring boot application
+3. need add Filter in yaml file of gateway if perticular service get down
+4. need to add hystrix configuration in gayway yaml file 
+
+
+Creating Hystrix dashboard
+
+1.create new application
+2.need to add hystrix dashboard dependency
+3.add annotation like @EnableHystrixDashboard
+4. add EnableHystrix in gateway spring boot application
+5.open hystrix dashboard by Url localhost:9195/hystrix
+6.open the stream 
+localhost:8989/actuator/hystrix.stream
+7. copy url of hystrix.stream and paste in dashboard
+8.you will see the failure in dashboard
+
+
+
+Spring Cloud config
+
+1.create a repository in github
+2.create file application.yml
+3.copy common code in yml file
+
+4. create spring boot application
+   add dependency of config server
+   add dependecy of eureka discovery client
+   annotated spring boot application with @EnableEurekaClient
+   annotated spring boot application with @EnableConfigServer
+5.add eureka client information in yaml file
+6.add configuration information in yaml file to acess git repository
+
+7. add spring-cloud-starter-config dependency in another spring boot project
+   eg. Order-service and payment-service,gateway
+8. to access properties file from config server
+   you have to give config information in yaml file in each microservice yaml file like payment-service and etc.
+9. you have to create bootstrap.yml file in each microservice and give information to acess config file information
+10.run service-registry,cloud-config,gateway,other microservices
+
+
+  Centralize Logging using ELK stack
+
+
+ELK - Elastic Logstash Kibana
+
+Elasticserach - help us to store the data
+
+         ElasticSearch is a NoSql database that is based on The Lucene search Engine which will helps us to store inputs/logs 
+
+Logstash- Help us to process the data
+
+         Logstash is long pipeline tools that accepts inputs/logs from various sources & Exports the data to various targets 
+
+Kibana- Views the data
+
+         Kibana is a visualization UI layer ,which will helps developer to monitor application logs.
+
+
+1. add logger in application
+2. create one log file and give path in yml file of microservice like in order-service,Payment-service
+
+3. go to elasticsearch  folder and go to inside bin and cmd time  and type and run elasticsearch.bat
+
+4. go to kibana folder and go to inside bin and cmd time  and type and run kibana.bat
+
+5. run elastic search and default port is 9200
+  localhost:9200/_cat/indices
+
+6. run kibana on port 5601
+   localhost:5601/app/kibana
+ 
+7. Logstash
+    1. goto inside bin folder and open logstash.conf  and change the  logfile path
+    2.give index name and timestamp
+
+8. run the logstash
+   go to bin folder and run the bat file
+
+  logstash.bat -f logstash.conf
+
+9. goto kibana home
+
+   need to add index pattern to kibana
+
+   click on Management  ->  click on Index pattern ->click on create Index patterns->  seracch index create javatechie-timestamp -> create index pattern
+
+   click on discover
+
+
+Distributed Tracing with Spring cloud ,Sleuth and Zipkin
+
+For every request spring cloud sluth generate Metadata that  consist of 4 element
+
+  Service Name  Trace Id spand Id  Export Flag
+
+Service name- microservice name
+
+Trace Id-  A Unique id that remain the same throughout the microservice for perticular request.
+
+Span Id- spand id unique for microservices
+
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+

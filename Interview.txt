@@ -1,0 +1,144 @@
+Toics to cover
+
+deployment application of spring boot in docker swarm
+
+Java 8
+1.feature
+2.map,filter,predicate,flatmap
+3.double predicate
+4.reduce
+5.Optional why we use Optional
+6.doublepredicate
+7.concat two list result in one list
+8.design pattern in java
+
+Springboot
+1.Diffrent annotation in spring boot
+2.@Springboot work
+3.
+
+Docker swarm
+
+Docker swarm is orchestration tool that comes with docker. it take container as service and it deployed them in cluster or swarm.
+
+	It provide all the orchestration services as
+
+	1. auto scaling
+
+	2.fault Tolerant
+
+	3.Rolling update
+
+	4.Auto Discovery
+
+	5.Load Balancing
+
+
+
+
+1.Software require 
+
+  Docker and minikube
+
+2 .Docker image
+
+from openjk:8-jdk-alpine
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} APP.JAR
+ENTRYPOINT["java","jar","/app.jar"]
+
+
+3. build the image
+
+docker build -t insuranceimage_tagname .
+
+
+3. run the Image
+
+   docker run -p 8080:8080 insuranceimage_tagname .
+
+4.  push image to docker hub
+
+  1. tag
+
+  docker tag insuranceimage_tagname rajesh210189/respositoryname:insuranceimage_tagname
+
+
+5.push image to docker hub
+ docker push rajesh210189/couponservice:insuranceimage_tagname
+
+  3.before push we need to login 
+     docker login -u username
+     then password enter
+
+Now u can push the docker image
+
+docker push rajesh210189/couponservice:insuranceimage_tagname
+
+
+6. Deploy application on kubernatis
+
+1. check the services in kubernatis
+   kubectl get services
+2. configMap- we need for database schema
+
+A Kubernetes volume is a directory that contains data accessible to containers in a given Pod in the orchestration and scheduling platform.
+mouthPath we mentioned the path where data is stored in the container.
+
+7. Secrets-
+  A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. 
+
+  Deployment.yml
+ we mentioned valume for database and aslo pull image and moutpath information
+  1. pull the image
+  2. mentioned the number of replicas
+
+service.yml
+  we write file for access the sql from outside the cluster
+   using Nodeport information
+
+
+8.Deploy application in kubernatis cluster
+
+   1. delete the cluster
+       
+         minikuber delete
+    2. start cluster
+        minikube
+
+9. then run below command to deploy and run application in kubernates cluster
+
+   kubectl create -f docker-mysql-configmap.yml,docker-mysql-deployment.yml,docker-mysql-service.yml
+
+  
+  1.check confignmap by 
+
+          kubectl get configMaps
+
+ 
+  2.check pods by 
+
+          kubectl get pods 
+
+
+  3.check services by 
+
+          kubectl get services
+
+  4.check deployement by 
+
+          kubectl get deployement
+
+
+10. Kubernatis use for big cluster
+
+11.how to check logs in kubernates
+   kubectl podname log
+
+
+
+
+
+
+
+

@@ -1,0 +1,93 @@
+1.Lampda expression
+
+  expression through which we can represent an Anonymous function
+
+Anonymous-  Nameless/Unknown
+
+
+eg.  public int add(int a,int b)
+     {
+       return a+b;
+     }
+
+lampda expression
+    //() -> {body};
+  (a,b)-> a+b;
+
+1. it will reduce the boilerplate code and dont need to right repeated code
+
+2.Functional interface
+    which contains only one abstract method 
+    and any number of default and static method.
+
+
+
+Stream api 
+
+why we need stream?
+1.functonal programming
+2.code reduce
+3.Bulk operation
+4. it will give good performance
+
+
+predicate
+
+ boolean test(T)
+
+function
+
+ R apply(T)
+
+
+consumer
+  void accept(T)
+
+supply
+
+ T get()
+
+
+3 Map and Flatmap
+
+Map- 
+
+It is used to transform the data
+It is used when there one to one mapping
+It is use when there is single list
+
+FlatMap-
+
+It is used to transform the data and flatter it.
+It is used when there one to many mapping
+It is use when there is List of list
+
+
+Optional<?>
+
+Customer cust=new Customer(1,"sham","");
+
+email is empty
+
+Optional.Of(cust.getEmail()) //it will give null pointer exception
+
+Iptiona<String> email= Optional.OfNullable(cust.getEmail()) //it will give not give null pointer pointer exception
+
+we can check value by present
+if(email.isPresent())
+{
+
+}
+
+
+Map- Transforming the data
+Reduce -Aggregating the data
+
+
+Parallel stream -using parallel stream we can utilize multiple core of the processor.
+
+
+sequetial stream - only one core is used 
+parallel stream - multiple core we will use.
+
+
