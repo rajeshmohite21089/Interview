@@ -1,0 +1,154 @@
+diffrence between promise and observable
+
+1.
+Promise-  Emit single value
+observable- Emit multiple values over pariod of time
+
+2.
+promise -not Lazy
+observable- Lazy.An obervable is not called util we subscribe to Obervable.
+
+
+validation
+
+ we can use FormGroup,validator for validation in Reactive form
+
+
+interceptor
+
+
+
+1. Angular is a javascript binding framework which binds the HTML UI 
+and Javascript Model.
+
+2. Directive in angular
+ 	1.  Directives are angular syntaxes which we write inside the HTML
+	2. NgModel,Hidden,value is directive
+	3.Directive changes the behaviour of HTML
+ 
+
+ 
+3.Type of Directive in agular
+
+SAC- structural ,Attribute and component directive
+
+Structural- changes the DOM of HTMl layout by adding and removing elements
+eg. <tr *NgFor="let temp of SalesModelObject" >
+
+Attribute- changes the appearance and behaviour of HTML elements
+           eg. hide and show div
+          <Div [hidden]="hide()">Hello</div>
+Component- Directives with templates.Its like a user control.
+           which has its own HTMl templates and own code.
+
+
+4. Importance of NPM and Node_Modules
+
+NPM package manager which help us to makes installation of javascript framework
+
+"Node_modules" is folder where all the packages are installed.
+
+5.Importance of Package.json file in angular
+   it has all the javacript refereneces needed for the project.
+6.what is typescript
+
+  Typescript is superset of javascript.It added types to Javascript
+   
+8.Angular CLI
+    Angular CLI is a command line interface by which we can create 
+    initial Angular project Template.
+    so rather than starting from scratch we have some boiler plate code.
+
+9. Component and module in agular
+   component is place where we write code to bind View and module
+   while module is group of components
+
+10.What is decorator in agular
+   Decorator defines what kind of angular class is it.
+   for example if you decorate "@Component" then it say its an Angular component,If put
+   "@NgModule" it becomes a Angular Module.
+
+
+11. what is Annotation and metadata
+     It is same like decorator
+
+12.What is template in Angular
+    Template is an HTMl view of Angular in which we can write directives
+     we can define the template in two way 
+     1. separate HTML file which we give in template URL in component
+     2. template inline
+
+13. diffrent types of data binding in Angular 
+        Data binding is how view and component communicate each other.
+        
+   1. expression or an Interpolation binding {{}}
+        data flow from component to view
+        eg. {{customerObject.customerId}}
+   2. Properties Binding []
+        data flow from component to view
+        
+
+    3. event binding  ()
+       when you want to send event from View to component
+
+            eg. (Click)="Toggle()"
+      
+    4. Two way Binding [()]
+          we can send data from component to view and view to controller
+      
+        eg. [(ngModel)]="CustomerObj.CustomerId"
+
+14.explain the architecture of angular
+     7 pillar of in Angular Architecture
+
+       1.Template- The HTML view of Angular
+       2.Component- Bind the view and model
+       3.Modules- Groups components logically
+       4.Bindings- Define how view and component communicate.
+       5.Directive- Changes the HTML DOM behaviour.
+       6.services- Helps to share common logic across the project.
+       7.DI-Dependency injection helps to inject instance across constructor.
+
+15.SPA
+
+   Single page Application-
+   single page application are application where the main UI gets loaded once and then the Needed UI is loaded on demand.
+   Routig help us for SPA
+   Routing is simple collection which has two things URL and when this URL is called which componet to load.
+   
+  
+
+16.how to implement rounting in angular
+  
+implement rounting need three things
+   1. router collection
+   2. router outlet
+   3.routerLink
+
+17. lazy loading
+    lazy loading means on demad loading.
+    Loading only the neccessary HTML,CSS and javascript files so that you have better performance.
+
+18.how can i implement lazy loading in agular
+    1. we need the project into separate module
+       eg. customer module and Home module.
+  2. use loadChildren in route collection 
+
+19. service 
+    services helps you to share common logic across angular project.
+
+20.Dependency Injection
+Depenedency injection is application design pattern where rather than creating object instance from within component.
+Angular Inject it via the constructor.
+
+ 21. how to create dependency injection in angular
+
+   In Ngmodule class we have Providers collection and inside the providers collection write provide
+ 
+22. what is benifit of using dependency injection
+     Dependency injection helps to decouple class dependencies, so that you add new dependencies you do not have change everywhere.
+
+23.diffrenece between ngServe and ngBuild
+     ng Serve build inmemory while ngBuild on hardisk. for production build you have to do ng build
+
+24. what is ng build --prod flag compresses you JS file ,remove comments

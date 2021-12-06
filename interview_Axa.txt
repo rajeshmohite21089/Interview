@@ -1,0 +1,142 @@
+
+
+A.How @SpringBootApplication work intenally and which annotation comes inside this.
+
+
+  
+B.Spring @profiler
+
+  we use profiler for acess data from diffrenece server like dev,UAt,prod
+
+   1. need create three properties file for dev,uat and prod  eg. application-dev.properties
+   2. need to mentioned the  below line in main application.properties file.
+       spring-profiles.active=local
+   3.use annotaion in service class
+     @Service
+     @profile("dev","dev","prod")
+     public class userService{
+
+       }
+
+
+C.Solid Principle
+
+
+D. how to configure multiple database in spring boot
+
+     1.Give the two datasource information in application.properties file
+     2.create two classes for two datasource 
+       use annotation
+       @Configuration
+       @EnableJpaRepositories(entityManagerFactoryRef="", TransactionManagerRef="")
+
+E.Tranasaction propagation and isolation
+
+F. AOP I- Centralize loging AOP
+
+      Aspect Oriented Programming which help us to segregate buissness logic to secondary logic
+
+      >	It is use to centralize the logging
+      >	We need to create one class annoted with @Aspect
+      > @Pointcut method
+        write expression for which package and which classess qualify for 
+
+             eg.
+              @pointcut(value="execution(* com.javatechie.*.*.*(..))")
+               public void myPointcut()
+               {
+
+               } 
+
+      >	@Around("mypointCut")
+        public Object applicationLogger(ProceedingJoinpoint pjp) throws Throwable
+         {
+ 
+         }  
+
+
+
+G. IOC
+
+           
+              1.application context extend the bean factory
+              2.bean factory laxy loading and application context is eager loading.
+
+
+
+
+
+
+
+3.bean scope
+  
+  1.singleton
+  2.prototype
+  3.request
+  4.session
+  5.global-session
+
+
+4.how to avoid cycly dependecy
+
+ 1.we can use setter injection
+ 2.we can use @Lazy annotation in custroctor injection
+
+
+
+5.validate json input 
+    Valid using @valid aanotatation @RequestBody inside the method body
+6.sql injection  
+  - We can use placeholder 
+
+7. CMD and Entrypoint diff.
+   	1.Both are excecuted at runtime 
+    	2.In case of CMD Instruction we can Override it
+    	3.In case of ENTRYPOINT Intruction we can not override it.
+
+9. @Qualifier and @Primary Annotation
+
+     @Qualifier - It used when which bean get called when there is multiple implementation of Autowired class.
+     @Primary   - It is used when which bean we have to priority when there is multiple implementation of Autowired class. 
+
+                    Animal interface and CAT and DOG implement eat method then which bean to give highest priority.
+
+                        
+                         @Qualifier("cat")
+                         @Autowire
+                         public Animal animal;
+   @Required -
+                It is work with the setter injection and it will not work with contruction injection.
+                @Autowire(required=false)
+                 
+
+     
+
+
+12.Contructor and setter
+    1. contructor injection are mandatory dependecy
+    2. Setter Injection are non mandatory dependency
+
+13.JWT token
+
+14.diff. agile and safe agile diffrence.
+    Level-
+     	Scrum- Agile at team level
+     	SAFE- Team
+           program
+           Solution
+           Portfolio 
+     Roles- 
+         Scrum- PO,PM and developement team
+         SAFE- Product Management
+               Solution Management
+               Epic Owner
+               Enterprise Architech
+               solution architech
+
+    Team size-  
+              Scrum-  7 to 9 Members
+              SAFE-  50 to 125 + team members in ART
+    Product Delivery Cycle:
+          scrum- 2 to 4 week (sprint)
+          safe-   8 to 12 week (Program increment)   

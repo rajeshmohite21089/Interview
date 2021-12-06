@@ -1,0 +1,6 @@
+1. Redis stand for remote directory server and more popular as in memory datastructure store. 
+2. Stored the value in key value format.
+3.U can use redis as database ,cache or you can use at is a message broker.
+4. create spring boot application select non-sql redis.
+5.add dependency Jedis
+6.
