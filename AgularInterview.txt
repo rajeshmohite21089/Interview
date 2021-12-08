@@ -1,7 +1,7 @@
 diffrence between promise and observable
 
 1.
-Promise-  Emit single value
+Promise-Emit single value
 observable- Emit multiple values over pariod of time
 
 2.
@@ -11,7 +11,7 @@ observable- Lazy.An obervable is not called util we subscribe to Obervable.
 
 validation
 
- we can use FormGroup,validator for validation in Reactive form
+ we can use fromcontrol, FormGroup,validator for validation in Reactive form
 
 
 interceptor
@@ -49,7 +49,9 @@ NPM package manager which help us to makes installation of javascript framework
 "Node_modules" is folder where all the packages are installed.
 
 5.Importance of Package.json file in angular
-   it has all the javacript refereneces needed for the project.
+
+   It has all the javacript refereneces needed for the project.
+
 6.what is typescript
 
   Typescript is superset of javascript.It added types to Javascript
@@ -152,3 +154,36 @@ Angular Inject it via the constructor.
      ng Serve build inmemory while ngBuild on hardisk. for production build you have to do ng build
 
 24. what is ng build --prod flag compresses you JS file ,remove comments
+
+25.what JIT and AOT
+    JIT- compiles the application Just-in-time in the browser at runtime
+    AOT- compilation compiles the application at build time
+
+   compile time error
+   	JIT- The template binding errors are only know at run time.
+   	AOT- With AOT compilation we will come to know about them at build time.
+
+     ng build --aot // not default aot need to add
+     ng build --prod // default aot
+    
+
+26. What are Lifecycle hooks in Angular? Explain some life cycles hooks
+
+       Lifecycle of component is managed by Angular
+      		1.creates the component
+       	 	2.Render the component
+        	3.Creates and renders the component children
+      	 	4.check the component data-bound properties changes
+       		5.destroy the component before removing the it from DOM.
+
+                    event
+
+                        1.ngOnChanges
+                             excutes every time the value of an input property changes .this is called before ngOnInit.
+                        2.ngOninit
+                             Excecute after the constructor and after the ngOnChange hook for the first time.is used commonely for initilization and retriving data from database.
+                        3.ngOnDestroy
+                             execute just before the angular destroy the component.used for cleanup.
+ 
+             
+27.Explain MVVM architecture?    
