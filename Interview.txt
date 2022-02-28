@@ -133,7 +133,10 @@ service.yml
 10. Kubernatis use for big cluster
 
 11.how to check logs in kubernates
-   kubectl podname log
+   kubectl log podname 
+   kubectl logs <container name>
+
+
 
 
 

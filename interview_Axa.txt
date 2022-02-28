@@ -6,7 +6,7 @@ A.How @SpringBootApplication work intenally and which annotation comes inside th
   
 B.Spring @profiler
 
-  we use profiler for acess data from diffrenece server like dev,UAt,prod
+  we use profiler for acess data from diffrent server like dev,UAt,prod
 
    1. need create three properties file for dev,uat and prod  eg. application-dev.properties
    2. need to mentioned the  below line in main application.properties file.
@@ -56,7 +56,7 @@ F. AOP I- Centralize loging AOP
 
 
 
-G. IOC
+G. IOC (Inversion of control)
 
            
               1.application context extend the bean factory
@@ -97,7 +97,7 @@ G. IOC
 9. @Qualifier and @Primary Annotation
 
      @Qualifier - It used when which bean get called when there is multiple implementation of Autowired class.
-     @Primary   - It is used when which bean we have to priority when there is multiple implementation of Autowired class. 
+     @Primary   - It is used when which bean we have to give priority when there is multiple implementation of Autowired class. 
 
                     Animal interface and CAT and DOG implement eat method then which bean to give highest priority.
 

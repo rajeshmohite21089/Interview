@@ -15,12 +15,68 @@ eurekha Client
 
 1.add eureka client depedendency
 2.add spring cloud dependency
-3.add EnableEurekaClient annotation
+3.add @EnableEurekaClient annotation
 3.add eureka client details in yaml file
 
 
+  yaml file for client  to register with eureka
 
-we annotated RestTemplate with @Loadbalanced
+   eureka
+      client:
+       registerWithEureka:true
+       fetchRegistry:true
+        serviceUrl:
+         defaultZone:http://localhost:8761/eureka/
+      instance:
+         hostname:localhost
+     server
+       port:8081
+     Spring
+       application:
+        name:PAYMENT:SERVICE      
+     
+ 
+
+
+
+we annotated RestTemplate with @Loadbalanced    and we need  ribbon library from where you are calling the service.
+
+(spring cloud ribbon netflix for loadbalance) it fallow round robin approach
+
+client side load balancing we used ribbon and add ribbon and devtools and web.
+
+
+
+note-chatbox we have to give same name in yml file
+
+
+yml file look like //dont need if you are eureka it will manage automatically
+
+ chatbox:
+   ribbon:
+     eureka:
+         enabled:false
+     listofServers:localhost:8081,localhost:8082,localhost:8083
+     ServerListRefreshInterval:2000
+
+@RestController
+dont need this as eureka handling//@RibbonClient(name="chatbox",configuration=RibbonConfiguration.class) //if using eureka then dont need to create configuration class it automatically manage
+public class UserApplication{
+
+@Autowired
+private  RestTemplate template;
+
+public String invokeChatBook()
+{
+
+String url="http://chatbook/chatbook-application/chat";  //chatbook is name mentioned in yml file.
+
+return template.geObject(url,String.class);
+}
+
+
+
+}         
 
 
 @LoadBalanced
@@ -31,7 +87,7 @@ public RestTemplate restTemplate()
 
 
 
-API Gateway
+API Gateway  used spring cloud gateway create new project
 
 1. need add dependency  gatway
 2.add eureka client depedendency
@@ -41,13 +97,36 @@ API Gateway
 5.add eureka client details in yaml file
 7. add cloud gatway in yaml file
 
+how to redirect perticular service check below syntax
+
+spring:
+  application:
+     name:GATWAY:SERVICE
+  cloud:
+    gateway
+       routes:
+          -id:order-service
+           uri:lb://ORDER-SERVICE
+         predicates:
+           -Path=/order/**          //any request comes with /order then redirect to order service.
+ 
  
 Hystrix dashboard
 
 1. add Hystrix  dependency in api gateway
 2.add fallback controller in api gateway spring boot application
 3. need add Filter in yaml file of gateway if perticular service get down
-4. need to add hystrix configuration in gayway yaml file 
+
+       eg.
+            filter:
+                name:CircuitBreaker
+                args:
+                   name:order-service
+                   fallbackuri:forwad:/orderFallack        //this url name method created in controller.  @RequestMapping("orderFallack") 
+         
+4. need to add hystrix configuration in gateway yaml file 
+        we need to add 
+           timeoutInmilliseconed: 5000
 
 
 Creating Hystrix dashboard
@@ -68,7 +147,7 @@ Spring Cloud config
 
 1.create a repository in github
 2.create file application.yml
-3.copy common code in yml file
+3.copy common code in yml file or URL which will will use by all the services and by url using @value(${insurance.provider.url})  and this url should be in application.properties file of config server
 
 4. create spring boot application
    add dependency of config server
@@ -76,7 +155,7 @@ Spring Cloud config
    annotated spring boot application with @EnableEurekaClient
    annotated spring boot application with @EnableConfigServer
 5.add eureka client information in yaml file
-6.add configuration information in yaml file to acess git repository
+6.add configuration information in yaml file and need add config server url and port details
 
 7. add spring-cloud-starter-config dependency in another spring boot project
    eg. Order-service and payment-service,gateway
@@ -84,9 +163,34 @@ Spring Cloud config
    you have to give config information in yaml file in each microservice yaml file like payment-service and etc.
 9. you have to create bootstrap.yml file in each microservice and give information to acess config file information
 10.run service-registry,cloud-config,gateway,other microservices
+11.You can use
+
+     @RefreshAll annotation in class level as dont need to restart the application
+
+     @Lazy in resttempate
+      
+     @value(${insurance.provider.url})
+     private String url;
+
+12. if need to create perticular service related properties file then need to create servicename.properties
+          payment-service.properties
+
+in application proprties file need to mentioned
+native
 
 
-  Centralize Logging using ELK stack
+in bootstrap.yml file need to mentioned
+
+spring.cloud.config.url=http://localhost:8012    // config server path
+spring.cloud.config=payment-service
+
+
+
+    
+    
+
+
+Centralize Logging using ELK stack
 
 
 ELK - Elastic Logstash Kibana
@@ -105,7 +209,7 @@ Kibana- Views the data
 
 
 1. add logger in application
-2. create one log file and give path in yml file of microservice like in order-service,Payment-service
+2. create one log file and give path in yml file of microservice like in order-service,Payment-service // localy u can local path
 
 3. go to elasticsearch  folder and go to inside bin and cmd time  and type and run elasticsearch.bat
 
@@ -139,23 +243,169 @@ Distributed Tracing with Spring cloud ,Sleuth and Zipkin
 
 For every request spring cloud sluth generate Metadata that  consist of 4 element
 
-  Service Name  Trace Id spand Id  Export Flag
-
+Service Name  Trace Id spand Id  Export Flag
 Service name- microservice name
-
 Trace Id-  A Unique id that remain the same throughout the microservice for perticular request.
-
 Span Id- spand id unique for microservices
 
 
 
+28-01-1989
 
 
 
+1.multiple request handle in spring boot
+
+container internal use threadpool
+
+handle 200 request at time
+
+if need to increse then u can update the tomcat properties in application.properties file the default size is 200
+server.tomcat.threads.max=500
+
+2.sluth zepkin
 
 
+Spring sluth will generate metadata for each request and contains 4 element
+
+service name- microsername
+Trace id- unique is that remain the same throughout the microservice for perticular request
+span id- unique id per microservice
+Export flag-
+
+
+need to download the zipkin jar from  maven repository and run it
+
+zipkin server get started
+
+1. need to add the sleuth and zipkin dependency in each microservice
+   1.user and payment microservice
+
+2.need to tell that service where is zipkin service is running
+  so need to mentioned the zipkin base-url in application-yml file
+spring:
+zipkin:  
+     base-url:http://localhost:9411/
+
+
+3.Cetralize logging
+
+ELK
+
+flow --> logs->logstash ->elastichserach-> kibana
+
+1.download elasticsearch ,kibana,logstash
+  a.run elasticsearch.bat
+    //uncomment ii kibana.yml file where is elasticsearch 
+  b.run kibana.bat file
+2.create logfile in services  and mentioned the path in application.yml
+ 
+ logging:
+       file://give path of logfile eg.  c://log/elk.logfile.log
+
+Intire log push to logtash
+3.create logstash.conf  in logtach folder
+      and give the path of your logfile  
+      and also mention elastasearch path in logstach.conf file
+      run the logstash.conf file 
+
+4.in kibana need to create the pattern which is same in the logtash
+
+  go to kibana dashboard->management->index pattern ->give index pater
      
 
+
+04-02-2022
+
+
+Resilence4j Feature
+
+1.circuit Breaker
+2.Rate Limit
+3.Time Limter
+4.Retry mechanism
+5.Bulkhead
+6.Cache
+
+
+
+need to add 3 dependency
+
+1.starter-actuator
+2.starter-aop
+3.resilence4j-spring-boot2
+
+need to enable health related actuator in application.yml file
+
+
+in Userservice.java
+
+method annoted with 
+
+@CircuitBreaker(name="userservice",fallbackMethod="getAvailableProduct")
+public List<OrderDto> displayOrder()
+{
+}
+
+//create method getAvailableProduct() which return dummy response
+
+
+
+management
+   health:
+     circuitbreaker:
+      enabled:true
+  endpoint:web
+      exposure:
+         include:health
+
+
+need to add resilence4j related information
+
+resilence4j:
+  circuitebreaker:
+     instance:
+       userService:
+          registerHealthIndicator:true
+          eventConsumerBufferSize:10
+          failurerateThreshhol:50
+           minimumNumberOfCall:5
+           automaticTrasnsitionFromOpentoHalfOpenEnabled:true
+           waitDurationInOpenState:5s
+           permittNumberOfCallsInHalfOpenState:3
+           slindingWindowSize:10
+           slindingWindowType:COUNT_BASE
+
+
+
+
+
+
+
+Config server
+
+
+1. if application.properties present in config server the microservice A which is client of config server give higher priority than local application.properties
+
+2.if specific microservice A.properties present in config server the A microserice give highen priority.
+
+3.give git url and username and password in application.properties of config server application
+4. need to add spring-cloud-starter-config dependency in client microservice that in A 
+5.create bootstrap.yml which will loaded before bean loaded
+6.give information like
+ spring.cloud.config.uri=http://localhost:8012
+ spring.cloud.config.name=Confiserver-domainname 
+
+7.if need to use native file that access file from centralize location
+   then add below line config server application properties file
+   spring.profiles.active=native
+   spring.cloud.config.server.native.search-location=             //help to find file location
+
+8. if u have to make microservice specific microservice then 
+    create A.properties file in config server
+
+  in bootstrap.yml give 
+  spring.cloud.config.name=A  //A will be my microservice name.
 
 
 

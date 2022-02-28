@@ -175,15 +175,70 @@ Angular Inject it via the constructor.
         	3.Creates and renders the component children
       	 	4.check the component data-bound properties changes
        		5.destroy the component before removing the it from DOM.
-
+ 
                     event
 
                         1.ngOnChanges
                              excutes every time the value of an input property changes .this is called before ngOnInit.
                         2.ngOninit
-                             Excecute after the constructor and after the ngOnChange hook for the first time.is used commonely for initilization and retriving data from database.
+                             Excecute after the constructor and after the ngOnChange hook for the first time.it is used commonely for initilization and retriving data from database.
                         3.ngOnDestroy
                              execute just before the angular destroy the component.used for cleanup.
  
              
 27.Explain MVVM architecture?    
+
+
+28.@Input and @output
+
+
+@Input - send data from parent to child.
+@Output - send data from child to parent.
+
+ 
+1.Need to create childComponent and it is child component and we can consider AppComponent as Parent component.
+2.Child component have property
+    @input loggedIn=false;
+
+3.we have properties in parent that in AppComponent.ts
+    userLoggedIn=true
+5.In App.component.html  need to bind the child and parent
+  <app-child [LoggedIn] ="userLoggedIn"></app-child>
+
+
+@Output
+send data from child to parent
+
+1.Need to create ChildComponent and it is child component and we can consider AppComponent as Parent Component.
+2.Child component need to do below changes.
+
+Child.component.html
+<h2></h2>
+
+<button (Click)="callParentGreet">Greet</button>
+
+  
+we need to do use EventEmitter 
+ChildComponent.ts
+
+    @output greetEvent=new EventEmitter();
+     name='codevolution';
+       
+     callParentGreet()
+      {
+         this.greetevent.emit(name);
+       }
+     
+3.AppComponent.ts
+      
+       greet(name:String)
+       {
+         alert('Hellow'+name);
+       }   
+
+4.app.component.html
+   <app-child (greetevent)="greet($event)"></app-child>
+
+29.Trasporming the data
+<p>The hero's birthday is {{ birthday | date:"MM/dd/yy" }} </p>
+   
