@@ -11,14 +11,14 @@ observable- Lazy.An obervable is not called util we subscribe to Obervable.
 
 validation
 
- we can use fromcontrol, FormGroup,validator for validation in Reactive form
+ we can use formcontrol, FormGroup,validator for validation in Reactive form
 
 
 interceptor
 
 
 
-1. Angular is a javascript binding framework which binds the HTML UI 
+1.Angular is a javascript binding framework which binds the HTML UI 
 and Javascript Model.
 
 2. Directive in angular
@@ -116,7 +116,7 @@ NPM package manager which help us to makes installation of javascript framework
    Single page Application-
    single page application are application where the main UI gets loaded once and then the Needed UI is loaded on demand.
    Routig help us for SPA
-   Routing is simple collection which has two things URL and when this URL is called which componet to load.
+   Routing is simple collection which has two things URL and when this URL is called which component to load.
    
   
 
@@ -134,7 +134,7 @@ implement rounting need three things
 18.how can i implement lazy loading in agular
     1. we need the project into separate module
        eg. customer module and Home module.
-  2. use loadChildren in route collection 
+    2. use loadChildren in route collection 
 
 19. service 
     services helps you to share common logic across angular project.

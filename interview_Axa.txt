@@ -6,7 +6,7 @@ A.How @SpringBootApplication work intenally and which annotation comes inside th
   
 B.Spring @profiler
 
-  we use profiler for acess data from diffrent server like dev,UAt,prod
+  We use profiler for acess data from diffrent server like dev,UAt,prod
 
    1. need create three properties file for dev,uat and prod  eg. application-dev.properties
    2. need to mentioned the  below line in main application.properties file.
